@@ -26,11 +26,7 @@ export class MainComponent {
     console.log(this.nameSearch.value);
   }
 
-  /**
-   * Добавление способности
-   * @return {void}
-   * @public
-   * */
+
   public addAbilityTo(): void {
     if (this.addAbility.valid) {
 
