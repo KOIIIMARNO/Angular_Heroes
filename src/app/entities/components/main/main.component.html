@@ -1,0 +1,145 @@
+<div class="grid">
+  <div class="box1">
+    <br>
+    <form [formGroup]="addData">
+    <p>Имя</p>
+      <mat-form-field>
+        <mat-label>Введите имя</mat-label>
+        <input formControlName="name"
+        matInput 
+        type="text">
+      </mat-form-field>
+      <br>
+      <p>Сила</p>
+      <mat-form-field>
+        <mat-label for="quantity">Установите силу</mat-label>
+        <input formControlName="power" 
+        matInput 
+        type="number" 
+        id="quantity" 
+        name="quantity" 
+        min="1" 
+        max="10" >
+      </mat-form-field>
+      <br>
+      <p>Способности</p>
+      <mat-form-field>
+        <mat-label>Выберите способности</mat-label>
+        <mat-select formControlName="ability" 
+        multiple 
+        class="select0">
+          <mat-option *ngFor="let ability of abilities" 
+          [value]="ability">{{ ability }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <p>Уровень</p>
+      <mat-form-field>
+        <mat-label for="quantity">Установите уровень</mat-label>
+        <input formControlName="level" 
+        matInput 
+        type="number" 
+        id="quantity" 
+        name="quantity" 
+        min="1" 
+        max="10">
+      </mat-form-field>
+
+    <br>
+    </form>
+    <button (click)='addHero()' 
+    mat-raised-button>Создать героя</button>
+    <br>
+  </div>
+  <br>
+</div>
+<br>
+<div class="box3">
+  <br>
+  <form [formGroup]="addAbility">
+    <p>Добавление способностей</p>
+    <mat-form-field>
+      <mat-label>Введите новую способность</mat-label>
+      <input formControlName='ability' 
+      matInput 
+      type="text">
+    </mat-form-field>
+  </form>
+  <button (click)='addAbilityTo()' 
+  mat-raised-button>Добавить способность</button>
+  <br>
+</div>
+<div class="box2">
+  <form [formGroup]="nameSearch">
+    <p>Уровень героя:
+
+      <mat-form-field class="number">
+        <mat-label for="quantity">от</mat-label>
+        <input formControlName="min" 
+        matInput 
+        type="number" 
+        id="quantity" 
+        name="quantity" 
+        min="1" 
+        max="10">
+      </mat-form-field>
+      
+      <mat-form-field class="number">
+        <mat-label for="quantity">до</mat-label>
+        <input formControlName="max" 
+        matInput 
+        type="number" 
+        id="quantity" 
+        name="quantity" 
+        min="1" 
+        max="10">
+      </mat-form-field>
+
+      <mat-form-field class="select">
+        <mat-label>Способности</mat-label>
+        <mat-select formControlName="ability" 
+        multiple>
+          <mat-option *ngFor="let ability of abilities" 
+          [value]="ability">{{ ability }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>Поиск по имени:
+      <mat-form-field class="input">
+        <input formControlName="name" 
+        matInput 
+        type="text">
+      </mat-form-field>
+      <mat-form-field class="select2">
+        <mat-label>Сортировка по уровню</mat-label>
+        <mat-select formControlName="sort">
+          <mat-option value="1">По возрастанию</mat-option>
+          <mat-option value="2">По убыванию</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+  </form>
+
+
+
+  <br>
+  <div class="box4">
+    <mat-expansion-panel *ngFor="let hero of table | pipfil:nameSearch.value"  
+    (opened)="panelOpenState = true" 
+    (closed)="panelOpenState = false" 
+    class="panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Имя: {{ hero.name }}
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <p>Сила: {{ hero.power }}</p>
+      <p>Способность: {{ hero.ability }}</p>
+      <p>Уровень: {{ hero.level }}</p>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="getIndex(hero)">Удалить героя</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </div>
+</div>
